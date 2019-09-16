@@ -10,8 +10,10 @@ def main():
     if not events:
         print('No upcoming events found.')
     for event in events:
-        start = event['start'].get('dateTime', event['start'].get('date'))
-        print(start, event['summary'])
+        print(event)
+        break
+        # start = event['start'].get('dateTime', event['start'].get('date'))
+        # print(start, event['summary'])
 
 if __name__ == '__main__':
     main()
