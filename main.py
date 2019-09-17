@@ -18,9 +18,24 @@ def main():
     #     break
     #     print(start, event['summary'])
 
-    ovApi = OV()
+    ns_getter = OV()
+    locations = {}
 
-    print(ovApi.plan_journey())
+    location = input("Please enter location: ")
+    print("\nYou entered: " + location)
+    print('---------------------------------')
+
+    counter = 1
+    for location in ns_getter.get_locations(location)['locations']:
+        locations[counter] = location['id']
+        print(str(counter) + ". " + location['name'])
+        counter += 1
+
+    location = input("Select location: ")
+    print("\nYou entered: " + location)
+    print('---------------------------------')
+
+    ns_getter.plan_journey(str(locations.get(int(location))))
 
 
 if __name__ == '__main__':

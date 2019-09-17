@@ -5,10 +5,10 @@ import requests
 class OV (object):
     url = 'http://api.9292.nl/0.1/'
 
-    def plan_journey(self):
+    def plan_journey(self, from_location):
         base_url = "journeys?lang=nl-NL&"
         time = "dateTime=" + datetime.now().strftime('%Y-%m-%dT%H%M')
-        from_station = "&from=station-hoorn"
+        from_station = "&from=" + from_location
         to_station = "&to=amsterdam/hogeschool-van-amsterdam-loc-wbh"
         before = "&before=1"
         after = "&after=5"
