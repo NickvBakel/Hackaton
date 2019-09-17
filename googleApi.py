@@ -2,10 +2,13 @@ from __future__ import print_function
 import datetime
 import pickle
 import os.path
+import pytz
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
+
 
 def get_events():
     """Shows basic usage of the Google Calendar API.
@@ -32,12 +35,28 @@ def get_events():
 
     service = build('calendar', 'v3', credentials=creds)
 
+    # Get the calendar id of the HvA schedule
+    page_token = None
+    calendar_id = None
+    while True:
+        calendar_list = service.calendarList().list(pageToken=page_token).execute()
+        for calendar_list_entry in calendar_list['items']:
+            if calendar_list_entry['summary'][0:23] == 'HvA persoonlijk rooster':
+                calendar_id = calendar_list_entry['id']
+        page_token = calendar_list.get('nextPageToken')
+        if not page_token:
+            break
+
+    # Return if HvA is not added
+    if not calendar_id:
+        return []
+
     # Call the Calendar API
-    now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
-    print('Getting the upcoming 10 events')
-    events_result = service.events().list(calendarId='primary', timeMin=now,
-                                          maxResults=10, singleEvents=True,
-                                          orderBy='startTime').execute()
+    now = datetime.datetime.now(pytz.timezone('Europe/Amsterdam'))
+    end_time = now.replace(hour=23, minute=59, second=59, microsecond=999999)
+
+    events_result = service.events().list(calendarId=calendar_id, timeMin=now.isoformat(), timeMax=end_time.isoformat(),
+                                          singleEvents=True, orderBy='startTime').execute()
     events = events_result.get('items', [])
 
     return events
