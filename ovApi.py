@@ -2,7 +2,7 @@ from datetime import datetime
 import requests
 
 
-class NS (object):
+class OV (object):
     url = 'http://api.9292.nl/0.1/'
 
     def plan_journey(self):
@@ -16,9 +16,17 @@ class NS (object):
         options = "&byFerry=true&bySubway=true&byBus=true&byTram=true&byTrain=true"
 
         url = self.url + base_url + time + from_station + to_station + before + after + sequence + options
-        response = requests.get(url)
-        print(response.status_code)
-        return url
+        journeys = requests.get(url)
+        journeys = journeys.json()
+
+        print(url)
+        for part in journeys['journeys'][0]['legs']:
+            if part['type'] == 'continuous':
+                print('Lopen')
+            else:
+                print('Scheduled')
+
+        return "success pik"
 
     def get_locations(self, location):
         url = self.url + 'locations?lang=nl-NL&q=' + location

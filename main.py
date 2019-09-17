@@ -1,7 +1,7 @@
 from __future__ import print_function
 
 from googleApi import get_events
-from ovApi import NS
+from ovApi import OV
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
@@ -18,9 +18,9 @@ def main():
     #     break
     #     print(start, event['summary'])
 
-    ns_getter = NS()
+    ovApi = OV()
 
-    print(ns_getter.get_locations('hoo'))
+    print(ovApi.plan_journey())
 
 
 if __name__ == '__main__':
