@@ -31,9 +31,7 @@ def main():
         print("No data")
         return
 
-    start_time, start_location, end_time, end_location = get_arrival_departure_time_location(events)
-    print("Arrive at: " + start_time + " at: " + start_location)
-    print("Departure at: " + end_time + " from: " + end_location)
+    start_time_calendar, start_location_calendar, end_time_calendar, end_location_calendar = get_arrival_departure_time_location(events)
 
     ov = OV()
     locations = {}
@@ -50,14 +48,19 @@ def main():
 
     location = input("Select location: ")
     print("\nYou entered: " + location)
-    print('---------------------------------')
 
     from_station = str(locations.get(int(location)))
-    to_station = "amsterdam/hogeschool-van-amsterdam-loc-wbh"
-    time = datetime.now().strftime('%Y-%m-%dT%H%M')
-    departure = "departure"
 
-    route = ov.plan_journey(from_station, to_station, time, departure)
+    print("----------------------------Heenreis----------------------")
+
+    route = ov.plan_journey(from_station, start_location_calendar, start_time_calendar, "arrival")
+
+    for part in route:
+        print(part)
+        print()
+
+    print("---------------------------Terugreis----------------------")
+    route = ov.plan_journey(end_location_calendar, from_station, end_time_calendar, "departure")
 
     for part in route:
         print(part)
