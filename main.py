@@ -55,47 +55,5 @@ def get_arrival_departure_time_location(events):
     return start_time, start_location, end_time, end_location
 
 
-def main():
-    events = get_events()
-    if not events:
-        print("No data")
-        return
-
-    start_time_calendar, start_location_calendar, end_time_calendar, end_location_calendar = get_arrival_departure_time_location(events)
-
-    ov = OV()
-    locations = {}
-
-    location = input("Please enter location: ")
-    print("\nYou entered: " + location)
-    print('---------------------------------')
-
-    counter = 1
-    for location in ov.get_locations(location)['locations']:
-        locations[counter] = location['id']
-        print(str(counter) + ". " + location['name'] + " (" + location['type'] + ")")
-        counter += 1
-
-    location = input("Select location: ")
-    print("\nYou entered: " + location)
-
-    from_station = str(locations.get(int(location)))
-
-    print("----------------------------Heenreis----------------------")
-
-    route = ov.plan_journey(from_station, start_location_calendar, start_time_calendar, "arrival")
-
-    for part in route:
-        part.show()
-        print()
-
-    print("---------------------------Terugreis----------------------")
-    route = ov.plan_journey(end_location_calendar, from_station, end_time_calendar, "departure")
-
-    for part in route:
-        part.show()
-        print()
-
-
 if __name__ == '__main__':
     app.run()

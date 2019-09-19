@@ -19,7 +19,7 @@ function fetchStations() {
         NSStations.innerHTML = '';
         res.locations.forEach((value) => {
           let li = document.createElement('li');
-          li.innerHTML = value.name;
+          li.innerHTML = value.name + "  " + value.type;
           li.className = 'item';
           li.id = value.id;
 

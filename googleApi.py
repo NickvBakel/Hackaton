@@ -54,8 +54,6 @@ def get_events():
 
     # Call the Calendar API
     now = datetime.datetime.now(pytz.timezone('Europe/Amsterdam'))
-    now = now.replace(day=20, hour=8)
-
     end_time = now.replace(hour=23, minute=59, second=59, microsecond=999999)
 
     events_result = service.events().list(calendarId=calendar_id, timeMin=now.isoformat(), timeMax=end_time.isoformat(),
