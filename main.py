@@ -13,8 +13,8 @@ def hello(query):
     return ov.get_locations(query)
 
 
-@app.route('/route/<from_station>')
-def get_route(from_station):
+@app.route('/route/<from_station>/<search_type>')
+def get_route(from_station, search_type):
     events = get_events()
     ov = OV()
     if not events:
@@ -24,8 +24,10 @@ def get_route(from_station):
         events)
     departure = ov.plan_journey(from_station, start_location_calendar, start_time_calendar, "arrival")
     arrival = ov.plan_journey(end_location_calendar, from_station, end_time_calendar, "departure")
-    print(departure)
-    return json.dumps(departure.__dict__)
+    if search_type == 'departure':
+        return json.dumps(departure, default = lambda x: x.__dict__)
+    else:
+        return json.dumps(arrival, default = lambda x: x.__dict__)
 
 
 ov_location_base = "amsterdam_hogeschool-van-amsterdam-loc-"
