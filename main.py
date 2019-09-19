@@ -2,6 +2,31 @@ from __future__ import print_function
 from googleApi import get_events
 from datetime import datetime
 from ovApi import OV
+from flask import Flask
+import json
+app = Flask(__name__)
+
+
+@app.route("/stations/<query>")
+def hello(query):
+    ov = OV()
+    return ov.get_locations(query)
+
+
+@app.route('/route/<from_station>')
+def get_route(from_station):
+    events = get_events()
+    ov = OV()
+    if not events:
+        print("No data")
+        return
+    start_time_calendar, start_location_calendar, end_time_calendar, end_location_calendar = get_arrival_departure_time_location(
+        events)
+    departure = ov.plan_journey(from_station, start_location_calendar, start_time_calendar, "arrival")
+    arrival = ov.plan_journey(end_location_calendar, from_station, end_time_calendar, "departure")
+    print(departure)
+    return json.dumps(departure.__dict__)
+
 
 ov_location_base = "amsterdam_hogeschool-van-amsterdam-loc-"
 
@@ -68,4 +93,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    app.run()
