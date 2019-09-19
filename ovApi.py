@@ -62,7 +62,7 @@ class OV(object):
             else:
                 end_time_temp = part['stops'][-1]['arrival']
                 if part['mode']['type'] == 'train':
-                    step.destination_temp = last_stop['stationType'] + " " + last_stop['name']
+                    destination_temp = last_stop['stationType'] + " " + last_stop['name']
                     step.kind = part['mode']['name'] + " richting " + part['destination']
                     step.departure_location = first_stop['stationType'] + " " + first_stop['name']
                     step.arrival_location = last_stop['stationType'] + " " + last_stop['name']
@@ -70,7 +70,7 @@ class OV(object):
                     step.arrival_time = part['stops'][-1]['arrival']
                     step.duration = self.calculate_duration(part['stops'][-1]['arrival'], part['stops'][0]['departure'])
                 else:
-                    step.destination_temp = last_stop['stopType'] + " " + last_stop['place']['name'] + " " + last_stop['name']
+                    destination_temp = last_stop['stopType'] + " " + last_stop['place']['name'] + " " + last_stop['name']
                     step.kind = part['mode']['name'] + " richting " + part['destination']
                     step.departure_location = first_stop['stopType'] + " " + first_stop['place']['name'] + " " + first_stop['name']
                     step.arrival_location = last_stop['stopType'] + " " + last_stop['place']['name'] + " " + last_stop['name']
