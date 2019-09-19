@@ -17,9 +17,21 @@ button {
 }
 
 .container {
+    width: 500px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+}
+
+.container_buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#DepartureButton, #ArrivalButton {
+    width: 100%;
+    margin: 2px;
 }
 
 input {

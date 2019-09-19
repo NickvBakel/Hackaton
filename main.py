@@ -15,8 +15,8 @@ def hello(query):
     return ov.get_locations(query)
 
 
-@app.route('/route/<from_station>/<search_type>')
-def get_route(from_station, search_type):
+@app.route('/route/<search_type>/<from_station>')
+def get_route(search_type, from_station):
     CORS(app)
     events = get_events()
     ov = OV()
