@@ -56,14 +56,14 @@ def main():
     route = ov.plan_journey(from_station, start_location_calendar, start_time_calendar, "arrival")
 
     for part in route:
-        print(part)
+        part.show()
         print()
 
     print("---------------------------Terugreis----------------------")
     route = ov.plan_journey(end_location_calendar, from_station, end_time_calendar, "departure")
 
     for part in route:
-        print(part)
+        part.show()
         print()
 
 
