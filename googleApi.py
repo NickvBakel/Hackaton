@@ -42,7 +42,7 @@ def get_events():
         calendar_list = service.calendarList().list(pageToken=page_token).execute()
         # print(calendar_list['items'])
         for calendar_list_entry in calendar_list['items']:
-            if calendar_list_entry['summary'][0:23] == 'HvA persoonlijk rooster':
+            if 'HvA' in calendar_list_entry['summary']:
                 calendar_id = calendar_list_entry['id']
         page_token = calendar_list.get('nextPageToken')
         if not page_token:
