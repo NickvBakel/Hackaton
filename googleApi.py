@@ -40,6 +40,7 @@ def get_events():
     calendar_id = None
     while True:
         calendar_list = service.calendarList().list(pageToken=page_token).execute()
+        print(calendar_list['items'])
         for calendar_list_entry in calendar_list['items']:
             if calendar_list_entry['summary'][0:23] == 'HvA persoonlijk rooster':
                 calendar_id = calendar_list_entry['id']
@@ -53,6 +54,8 @@ def get_events():
 
     # Call the Calendar API
     now = datetime.datetime.now(pytz.timezone('Europe/Amsterdam'))
+    now = now.replace(day=20, hour=8)
+
     end_time = now.replace(hour=23, minute=59, second=59, microsecond=999999)
 
     events_result = service.events().list(calendarId=calendar_id, timeMin=now.isoformat(), timeMax=end_time.isoformat(),

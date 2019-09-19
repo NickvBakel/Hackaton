@@ -4,11 +4,13 @@ from datetime import datetime
 from ovApi import OV
 from flask import Flask
 import json
+from flask_cors import CORS
 app = Flask(__name__)
 
 
 @app.route("/stations/<query>")
 def hello(query):
+    CORS(app)
     ov = OV()
     return ov.get_locations(query)
 
