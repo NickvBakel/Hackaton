@@ -1,0 +1,14 @@
+{
+    "name": "Hackaton HvA",
+    "version": "1.0",
+    "description": "Calendar application",
+    "permissions": ["declarativeContent", "storage"],
+    "background": {
+      "scripts": ["/js/background.js"],
+      "persistent": false
+    },
+    "page_action": {
+      "default_popup": "/html/popup.html"
+    },
+    "manifest_version": 2
+}
