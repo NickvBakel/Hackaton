@@ -28,6 +28,7 @@ NSButton.addEventListener("click", function () {
 
 document.getElementById("stations").addEventListener("click",function(e) {
   if (e.target && e.target.matches("li.item")) {
+      chrome.extension.getBackgroundPage().console.log(e.target.id);
     fetch(URL_PLANNING_ARRIVAL + e.target.id)
         .then(data => {
           return data.json()

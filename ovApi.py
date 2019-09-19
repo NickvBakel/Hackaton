@@ -19,7 +19,7 @@ class OV(object):
 
         url = self.url + base_url + time + from_station + to_station + before + after + sequence + options + search_type
         journeys = requests.get(url).json()
-        print(url)
+        # print(url)
         steps = []
         first = True
         counter = 1

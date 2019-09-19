@@ -17,6 +17,7 @@ def hello(query):
 
 @app.route('/route/<from_station>/<search_type>')
 def get_route(from_station, search_type):
+    CORS(app)
     events = get_events()
     ov = OV()
     if not events:
