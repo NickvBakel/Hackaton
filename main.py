@@ -36,7 +36,10 @@ def main():
     ov = OV()
     locations = {}
 
-    location = input("Please enter location: ")
+    location = ''
+    while(len(location) < 1):
+        location = input("Please enter location: ")
+
     print("\nYou entered: " + location)
     print('---------------------------------')
 
@@ -46,7 +49,9 @@ def main():
         print(str(counter) + ". " + location['name'] + " (" + location['type'] + ")")
         counter += 1
 
-    location = input("Select location: ")
+    location = ''
+    while not location.isdigit():
+        location = input("Select location: ")
     print("\nYou entered: " + location)
 
     from_station = str(locations.get(int(location)))
