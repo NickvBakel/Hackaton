@@ -1,10 +1,10 @@
 # PlanMyTrip
-##What is PlanMyTrip
+## What is PlanMyTrip
 PlanMyTrip is an integrated extension for google Chrome. It can however, also be run as a script.When logged in into 
 your google calendar, PlanMyTrip will look for the calendar which contains HvA. This one is used for planning. With a 
 simple push on the button to or from which station you want it to plan, it shows the most practical journey.   
 
-##How to run
+## How to run
 ### As a script
 To run PlanMyTrip as a script, simply type 
 ```python
